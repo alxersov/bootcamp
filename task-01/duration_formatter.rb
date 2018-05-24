@@ -1,51 +1,38 @@
 class DurationFormatter
     class TimeSpan
-        def initialize(name, duration_in_seconds, max_value)
+        def initialize(name, max_value = nil, next_span = nil)
             @name = name
-            @duration_in_seconds = duration_in_seconds
             @max_value = max_value
+            @next_span = next_span
         end
 
-        def format(seconds)
-            value = seconds / @duration_in_seconds
+        def format(value)
+            spans = @next_span ? @next_span.format(value / @max_value) : []
 
             value %= @max_value if @max_value
-            
-            if value == 0
-                nil
-            else
-                "#{value} #{@name}#{'s' if value > 1}"
+            if value > 0
+                spans.push("#{value} #{@name}#{'s' if value > 1}")
             end
-        end
 
-        def max_value_in_seconds
-            @max_value.nil? ? nil : @max_value * @duration_in_seconds
+            spans
         end
     end
 
     def format_duration seconds
         return 'now' if seconds == 0
 
-        second = TimeSpan.new("second", 1, 60)
-        minute = TimeSpan.new("minute", second.max_value_in_seconds, 60)
-        hour = TimeSpan.new("hour", minute.max_value_in_seconds, 24)
-        day = TimeSpan.new("day", hour.max_value_in_seconds, 365)
-        year = TimeSpan.new("year", day.max_value_in_seconds, nil)
+        year = TimeSpan.new("year")
+        day = TimeSpan.new("day", 365, year)
+        hour = TimeSpan.new("hour", 24, day)
+        minute = TimeSpan.new("minute", 60, hour)
+        second = TimeSpan.new("second", 60, minute)
 
-        spans = [
-            year, day, hour, minute, second
-        ]
+        spans = second.format(seconds)
 
-        span_strings = spans.map do |s|
-            s.format(seconds)
-        end.reject(&:nil?)
-
-        first_part = span_strings[0..-2].join(', ')
-        last_part = span_strings[-1]
-        if first_part != ''
-            "#{first_part} and #{last_part}"
+        if spans.length == 1
+            spans[0]
         else
-            last_part
+            [spans[0..-2].join(', '), spans[-1]].join(' and ')
         end
     end
 end
