@@ -33,15 +33,14 @@ class Breeding
 
         a = combine(gens1[0,2].chars, gens2[0,2].chars)
         t = combine(gens1[2,2].chars, gens2[2,2].chars)
+        at = combine(a, t)
 
         counts = Hash.new(0)
-        combine(a, t).each do |s|
-            counts[canonical(s)] += 1
-        end
+        at.each { |g| counts[canonical(g)] += 1 }
 
         puts('Breeding chances:')
         counts.keys.each do |c|
-            puts("#{colors[c]} (#{c}) -  #{counts[c]/16.0*100}%")
+            puts("#{colors[c]} (#{c}) - #{counts[c]/16.0*100}%")
         end
     end
 
