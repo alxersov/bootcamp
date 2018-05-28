@@ -17,29 +17,27 @@ class Popcorn
         def available_nodes
             connections.each {|n| yield(n) unless n.used}
         end
-
     end
 
     def initialize
         @wordsSet = Set.new(Words)
     end
 
-
     def word?(word)
         @wordsSet.include?(word)
     end
 
-    def walk(node, prefix)
+    def walk(node, prefix = '', &block)
         node.used = true
 
         word = prefix + node.char
-        puts word if word?(word)
-        node.available_nodes {|n| walk(n, word)}
+        yield(word)
+        node.available_nodes {|n| walk(n, word, &block)}
 
         node.used = false
     end
 
-    def list_words
+    def create_graph
         r = Node.new('r', [])
         p1 = Node.new('p', [r])
         n = Node.new('n', [r, p1])
@@ -49,9 +47,11 @@ class Popcorn
         c = Node.new('c', [o1, n, a])
         p2 = Node.new('p', [o2, a, c])
 
-        root = Node.new('', [r, p1, n, o1, o2, a, c, p2])
+        Node.new('', [r, p1, n, o1, o2, a, c, p2])
+    end
 
-        walk(root, '')
+    def list_words
+        walk(create_graph) {|word| puts word if word?(word)}
     end
 end
 
