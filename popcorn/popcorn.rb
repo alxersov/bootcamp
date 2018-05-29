@@ -4,18 +4,33 @@ class Popcorn
     Words = %w(cat dog pop corn popcorn crop corp)
 
     class Node
-        attr_reader :connections, :char
-        attr_accessor :used
+        attr_reader :char
 
-        def initialize(char, connections)
+        def initialize(char)
             @char = char
-            @used = false
-            @connections = Set.new(connections)
-            connections.each {|n| n.connections.add(self) }
+        end
+    end
+
+    class Graph
+        def initialize(nodes)
+            @edges = {}
+            nodes.each {|n| @edges[n] = []}
         end
 
-        def available_nodes
-            connections.each {|n| yield(n) unless n.used}
+        def add_edge (node1, node2)
+            @edges[node1].push(node2)
+            @edges[node2].push(node1)
+        end
+
+        def bfs (current_node = nil, visited_nodes = nil, &block)
+            if current_node.nil?
+                @edges.keys.each {|n| bfs(n, [], &block)}
+            else
+                visited_nodes.push(current_node)
+                yield(visited_nodes)
+                @edges[current_node].each {|n| bfs(n, visited_nodes, &block) unless visited_nodes.include?(n)}
+                visited_nodes.delete(current_node)
+            end
         end
     end
 
@@ -27,31 +42,43 @@ class Popcorn
         @wordsSet.include?(word)
     end
 
-    def walk(node, prefix = '', &block)
-        node.used = true
-
-        word = prefix + node.char
-        yield(word)
-        node.available_nodes {|n| walk(n, word, &block)}
-
-        node.used = false
-    end
-
     def create_graph
-        r = Node.new('r', [])
-        p1 = Node.new('p', [r])
-        n = Node.new('n', [r, p1])
-        o1 = Node.new('o', [r, n])
-        o2 = Node.new('o', [p1, n])
-        a = Node.new('a', [p1, o1, o2, n])
-        c = Node.new('c', [o1, n, a])
-        p2 = Node.new('p', [o2, a, c])
+        r = Node.new('r')
+        p1 = Node.new('p')
+        n = Node.new('n')
+        o1 = Node.new('o')
+        o2 = Node.new('o')
+        a = Node.new('a',)
+        c = Node.new('c',)
+        p2 = Node.new('p')
 
-        Node.new('', [r, p1, n, o1, o2, a, c, p2])
+        graph = Graph.new([r, p1, n, o1, o2, a, c, p2])
+        graph.add_edge(p1, r)
+        graph.add_edge(n, r)
+        graph.add_edge(n , p1)
+        graph.add_edge(o1, r)
+        graph.add_edge(o1, n)
+        graph.add_edge(o2, p1)
+        graph.add_edge(o2, n)
+        graph.add_edge(a, p1)
+        graph.add_edge(a, o1)
+        graph.add_edge(a, o2)
+        graph.add_edge(a, n)
+        graph.add_edge(c, o1)
+        graph.add_edge(c, n)
+        graph.add_edge(c, a)
+        graph.add_edge(p2, o2)
+        graph.add_edge(p2, a)
+        graph.add_edge(p2, c)
+
+        graph
     end
 
     def list_words
-        walk(create_graph) {|word| puts word if word?(word)}
+        create_graph.bfs do |visited_nodes|
+            word = visited_nodes.map{|n| n.char}.join
+            puts word if word? word
+        end
     end
 end
 
