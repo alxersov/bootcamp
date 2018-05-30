@@ -50,3 +50,6 @@ build-iPhoneSimulator/
 .rvmrc
 
 .DS_Store
+
+# Files used by tasks
+task-03/notes.txt
