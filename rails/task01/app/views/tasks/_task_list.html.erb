@@ -1,0 +1,11 @@
+<table>
+<% tasks.each do |task| %>
+  <tr>
+    <td><%= task.title %></td>
+    <% if !task.is_completed -%>
+      <td><%= link_to 'Done!', "/tasks/#{task.id}/done", method: :post %></td>
+    <% end -%>
+    <td><%= link_to 'Remove', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>

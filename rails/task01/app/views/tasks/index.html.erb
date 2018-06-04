@@ -1,0 +1,13 @@
+<h1>Task List</h1>
+
+<h2>To do</h2>
+
+<%= render partial: 'task_list', locals: {tasks: @tasks.select{|t| !t.is_completed}} %>
+
+<br />
+
+<%= link_to 'New Task', new_task_path %>
+
+<h2>Completed</h2>
+
+<%= render partial: 'task_list', locals: {tasks: @tasks.select{|t| t.is_completed}} %>
