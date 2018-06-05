@@ -38,7 +38,7 @@ class TasksController < ApplicationController
   end
 
   def done
-    @task = Task.find(params[:task_id])
+    @task = Task.find(params[:id])
 
     respond_to do |format|
       if @task.update_attributes({is_completed: true})
@@ -48,6 +48,14 @@ class TasksController < ApplicationController
         format.html { render action: "edit" }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def delete_confirmation
+    @task = Task.find(params[:id])
+
+    respond_to do |format|
+      format.html
     end
   end
 

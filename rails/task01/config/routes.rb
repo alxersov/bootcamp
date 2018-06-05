@@ -1,11 +1,8 @@
 Task01::Application.routes.draw do
+
   resources :tasks do
-    post 'done'
-  end
-
-
-  resources :posts do
-    resources :comments
+    post 'done', on: :member
+    get 'delete_confirmation', on: :member
   end
 
 
