@@ -1,3 +1,9 @@
+PATH
+  remote: engines/admin_panel
+  specs:
+    admin_panel (0.0.1)
+      rails (~> 3.2.22)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -111,6 +117,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  admin_panel!
   coffee-rails (~> 3.2.1)
   jquery-rails
   rails (= 3.2.22)
