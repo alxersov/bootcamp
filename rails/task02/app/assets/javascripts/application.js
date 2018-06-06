@@ -10,15 +10,6 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery/jquery-3.2.1.min
-//= require animsition/js/animsition
-//= require bootstrap/js/popper
-//= require bootstrap/js/bootstrap
-//= require select2/select2
-//= require slick/slick
-//= require slick-custom
-//= require countdowntime/countdowntime
-//= require lightbox2/js/lightbox
-//= require sweetalert/sweetalert.min
-//= require main
+//= require jquery
+//= require jquery_ujs
 //= require_tree .

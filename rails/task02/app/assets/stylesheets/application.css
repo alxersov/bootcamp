@@ -10,18 +10,4 @@
  *
  *= require_self
  *= require_tree .
- *= require bootstrap/bootstrap
- *= require font-awesome-4.7.0/css/font-awesome
- *= require themify/themify-icons
- *= require Linearicons-Free-v1.0.0/icon-font.min
- *= require elegant-font/html-css/style
- *= require animate/animate
- *= require css-hamburgers/hamburgers
- *= require animsition/css/animsition
- *= require select2/select2
- *= require daterangepicker/daterangepicker
- *= require slick/slick.css
- *= require lightbox2/css/lightbox
- *= require util
- *= require main
  */
