@@ -3,6 +3,8 @@ Task02::Application.routes.draw do
 
   root to: "home#index"
 
+  mount AdminPanel::Engine, at: "/admin"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
