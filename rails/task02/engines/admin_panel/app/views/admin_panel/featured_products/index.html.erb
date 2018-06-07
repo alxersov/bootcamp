@@ -1,0 +1,28 @@
+<h1>Listing featured_products</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Image</th>
+    <th>Price</th>
+    <th>Image</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @featured_products.each do |featured_product| %>
+  <tr>
+    <td><%= featured_product.title %></td>
+    <td><%= featured_product.price %></td>
+    <td><%= featured_product.image %></td>
+    <td><%= link_to 'Show', featured_product %></td>
+    <td><%= link_to 'Edit', edit_featured_product_path(featured_product) %></td>
+    <td><%= link_to 'Destroy', featured_product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Featured product', new_featured_product_path %>
