@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20180607125024) do
+ActiveRecord::Schema.define(:version => 20180608104603) do
 
   create_table "admin_panel_featured_products", :force => true do |t|
     t.string   "title"
@@ -19,6 +19,21 @@ ActiveRecord::Schema.define(:version => 20180607125024) do
     t.decimal  "price",      :precision => 8, :scale => 2
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
+  end
+
+  create_table "admin_panel_inspirations", :force => true do |t|
+    t.string   "title"
+    t.string   "image"
+    t.string   "url"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "admin_panel_shippings", :force => true do |t|
+    t.string   "title"
+    t.string   "text"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "admin_panel_sliders", :force => true do |t|
