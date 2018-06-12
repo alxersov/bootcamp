@@ -40,3 +40,6 @@ gem 'jquery-rails'
 
 gem 'admin_panel', path: 'engines/admin_panel'
 
+group :development, :test do
+  gem 'rspec-rails', '~> 3.7'
+end
