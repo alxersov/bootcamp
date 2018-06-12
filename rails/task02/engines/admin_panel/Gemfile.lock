@@ -52,6 +52,7 @@ GEM
     mime-types (1.25.1)
     multi_json (1.13.1)
     polyglot (0.3.5)
+    power_assert (1.1.2)
     rack (1.4.7)
     rack-cache (1.7.2)
       rack (>= 0.4)
@@ -83,6 +84,8 @@ GEM
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.13)
+    test-unit (3.2.8)
+      power_assert
     thor (0.20.0)
     tilt (1.4.1)
     treetop (1.4.15)
@@ -97,6 +100,7 @@ DEPENDENCIES
   admin_panel!
   jquery-rails
   sqlite3
+  test-unit (~> 3.0)
 
 BUNDLED WITH
    1.16.1

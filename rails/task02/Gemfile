@@ -39,3 +39,4 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 gem 'admin_panel', path: 'engines/admin_panel'
+
