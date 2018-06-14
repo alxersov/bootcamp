@@ -1,0 +1,31 @@
+<h1>Listing sliders</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Catption</th>
+    <th>Banner</th>
+    <th>Button url</th>
+    <th>Button text</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sliders.each do |slider| %>
+  <tr>
+    <td><%= slider.title %></td>
+    <td><%= slider.catption %></td>
+    <td><%= slider.banner %></td>
+    <td><%= slider.button_url %></td>
+    <td><%= slider.button_text %></td>
+    <td><%= link_to 'Show', slider %></td>
+    <td><%= link_to 'Edit', edit_slider_path(slider) %></td>
+    <td><%= link_to 'Destroy', slider, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Slider', new_slider_path %>

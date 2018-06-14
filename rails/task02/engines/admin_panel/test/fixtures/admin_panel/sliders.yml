@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: 
+  catption: 
+  banner: 
+  button_url: 
+  button_text: MyString
+
+two:
+  title: 
+  catption: 
+  banner: 
+  button_url: 
+  button_text: MyString
