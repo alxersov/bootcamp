@@ -1,0 +1,11 @@
+<p>
+  <b>Title:</b>
+  <%= @task.title %>
+</p>
+
+<p>
+    Do you really want to delete this task?
+</p>
+
+<%= link_to 'Remove', @task, method: :delete %>
+<%= link_to 'Back', tasks_path %>

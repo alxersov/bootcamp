@@ -1,0 +1,13 @@
+<table>
+<% tasks.each do |task| %>
+  <tr>
+    <td><%= task.title %></td>
+    <% if !task.is_completed -%>
+      <td><%= link_to 'Done!', "/tasks/#{task.id}/done", method: :post %></td>
+    <% end -%>
+    <td><%= link_to 'Show', task %></td>
+    <td><%= link_to 'Edit', edit_task_path(task) %></td>
+    <td><%= link_to 'Remove', controller: "tasks", action: "delete_confirmation", id: task %></td>
+  </tr>
+<% end %>
+</table>
